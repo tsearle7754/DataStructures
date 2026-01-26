@@ -13,3 +13,5 @@ public:
 };
 
 #endif
+
+// to update data in one of the nodes, n1->next->data = 100;
