@@ -26,7 +26,6 @@ public:
     // TODO
     void push_back(int val);   // insert the new node at the end
     // iterate through until you hit nullptr then push new node?
-
     // check empty, else assign pointer to head, find last node in list, set cur->next, increment size
 
     void pop_front();   // remove the first element (node)

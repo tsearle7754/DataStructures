@@ -8,8 +8,32 @@ SLList::SLList() {
     list_size = 0;
 }
 
+// TODO
 SLList::SLList(const SLList& other) {
-    
+    // initialize empty list, use push_back to fill in
+    head = nullptr;
+    tail = nullptr;
+    list_size = 0;
+    SLLNode* cur = other.head;
+    while (cur != nullptr) {
+        push_back(cur->data);
+        cur = cur->next;
+    }
+}
+
+SLList& SLList::operator=(const SLList& other) {
+    // account for if they're already equal
+    if (this == &other) {
+        return *this;
+    }
+    // clear whatever was there, use push_back to fill in and make equal
+    clear();
+    SLLNode* cur = other.head;
+    while (cur != nullptr) {
+        push_back(cur->data);
+        cur = cur->next;
+    }
+    return *this;
 }
 
 SLList::~SLList() {
@@ -86,6 +110,31 @@ void SLList::clear() {
     while (!empty()) {
         pop_front();
     }
+}
+
+// make sure to avoid memory leaks
+void SLList::pop_back() {
+    if (empty()) {
+        return; // nothing to pop
+    }
+
+    if (head == tail) {
+        // only one node in the list
+        delete head;
+        head = nullptr;
+        tail = nullptr;
+    } else {
+        // find node before tail
+        SLLNode* cur = head;
+        while (cur->next != tail) {
+            cur = cur->next;
+        }
+        delete tail;
+        tail = cur;
+        tail->next = nullptr;
+    }
+
+    list_size--;
 }
 
 // Node has data and next, list has head and size
