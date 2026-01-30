@@ -1,16 +1,16 @@
-#ifndef SLLIST_H
-#define SLLIST_H
-#include "SLLNode.hpp"
+#ifndef DLLIST_H
+#define DLLIST_H
+#include "DLLNode.hpp"
 
 template <typename T>
-class SLList {
+class DLList {
 public:
     // no arg constructor
-    SLList();
+    DLList();
 
     // TODO
     // copy constructor
-    SLList(const SLList<T>& other);
+    DLList(const DLList<T>& other);
 
     // assignment operator
     // SLList<T>& operator=(const SLList<T>& other);
@@ -19,10 +19,17 @@ public:
     // destructor
     //~SLList();
 
+    bool empty() const; // returns true if the list is empty
+    // visualize where you are, where to link - draw
+
+
     // unsigned size() const;  // return size of list
     // bool empty() const;     // returns true if list is empty
     void push_front(const T& value);     // inserts the new node at the beginning
     void print() const;     // print the list
+    void pop_back();
+
+    bool empty() const; // returns true if the list is empty
 
     // TODO
     // void push_back(const T& val);   // insert the new node at the end
@@ -36,10 +43,13 @@ public:
     // void pop_back();    // remove last element(node)
       
 private:
-    SLLNode<T>* head;  // pointer to first node
-    SLLNode<T>* tail;  // pointer to last node
+    DLLNode<T>* head;  // pointer to first node
+    DLLNode<T>* tail;  // pointer to last node
     unsigned list_size;
 };
 
 
 #endif
+
+// Sentinel nodes: two specific nodes, one at the head and one at the tail, that 
+// to insert, point head of new node to head, then have that head point back. repeat for tail.

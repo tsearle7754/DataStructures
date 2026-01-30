@@ -1,11 +1,11 @@
-#ifndef SLLNODE_H
-#define SLLNODE_H
+#ifndef DLLNODE_H
+#define DLLNODE_H
 
 template <typename T>
 class DLLNode {
 // T() - default template value
 public:
-    SLLNode(const T& d = T(), DLLNode<T> *p = nullptr; DLLNode<T> *n = nullptr) {
+    DLLNode(const T& d = T(), DLLNode<T> *p = nullptr, DLLNode<T> *n = nullptr) {
         data = d;
         prev = p;
         next = n;
