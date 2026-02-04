@@ -1,6 +1,6 @@
-#ifndef DLLIST_H
-#define DLLIST_H
-#include "DLLNode.hpp"
+#ifndef DLList_H
+#define DLList_H
+#include "QueueDLL.hpp"
 
 template <typename T>
 class DLList {
