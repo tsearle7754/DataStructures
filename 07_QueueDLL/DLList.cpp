@@ -44,7 +44,7 @@ void DLList<T>::pop_back() {
 
 template <typename T>
 void DLList<T>::pop_front() {
-    if (head-> != tail) {
+    if (head->next != tail) {
         DLLNode<T>* to_delete = head->next; // pointer to first real node
         head->next = to_delete->next;   // assign to second node
         head->next->prev = head;    // link back to head
