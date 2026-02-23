@@ -6,10 +6,13 @@
 Board::Board() {
     board_size = 8;
     std::string row(board_size, ' ');
+
     for(int i = 0; i < board_size; i++) {
         board.push_back(row);
     }
 }
+
+// helper - edge case, for (row){ for (col) { if (board[i][j] is empty) { if (check_place(i, j)) { place queen, call helper, clear queen)}}}}
 
 void Board::print() const {
     int i = 0;
