@@ -4,8 +4,20 @@
 template <typename T>
 class BTNode {
 public:
-    BTNode(const T& val = T(), BTNode<T>* l, BTNode<T>* r = nullptr) : data(val), left(l), right(r) {}
-    
+    BTNode(const T& val = T(), BTNode<T>* l = nullptr, BTNode<T>* r = nullptr)
+        : data(val), left(l), right(r) {}
+
+    bool isLeaf() const {
+        return !left && !right;
+    }
+
+    bool hasOneChild() const {
+        return !isLeaf() && !hasTwoChildren();      // exclusively one child
+    }
+
+    bool hasTwoChildren() const {
+        return left && right;
+    }
 
     T data;
     BTNode<T>* left;

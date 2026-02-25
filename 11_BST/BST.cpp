@@ -53,3 +53,39 @@ void BST<T>::inorder(BTNode<T>* node) const {
     std::cout << node->data << ' ';
     inorder(node->right);
 }
+
+template <typename T>
+bool BST<T>::isFullTree() const {
+    // need helper function to traverse through tree
+    return isFullTree(root);
+}
+
+// helper function
+template <typename T>
+bool BST<T>::isFullTree(const BTNode<T>* node) const {
+    if (!node) {
+        return true;
+    }
+    if (node.hasOneCild()) {
+        return false;
+    }
+    return isFullTree(node->left) && isFullTree(node->right);
+}
+
+template <typename T>
+BTNode<T>* BST<T>::search(const T& val) const {
+    BTNode<T>* cur = root;
+
+    while (cur) {
+        if (cur->data == val) {     // found value
+            return cur;
+        }
+        else if (cur->data > val) {      // value is less than, go left
+            cur = cur->left;
+        }
+        else {
+            cur = cur->right;       // value is greater than, go right
+        }
+    }
+    return nullptr;     // if never found
+}
