@@ -201,7 +201,7 @@ void BST<T>::deleteNodeWithOneChild(BTNode<T>* child, BTNode<T>* parent) {
 template <typename T>
 void BST<T>::print() const {
     std::cout << "====================\n";
-    print("", root, false);     // ??
+    print("", root, false);     // from helper function
     std::cout << "====================\n";
 }
 
@@ -214,18 +214,18 @@ void BST<T>::print(const std::string& prefix, BTNode<T>* node, bool isRight) con
     std::cout << prefix;    // will grow with every level - prefix = "   ", so with each right and left, will move
 
     if (node != root) {     // any internal node
-        std::cout << (isRight ? "R--" : "L--");
+        std::cout << (isRight ? "R----" : "L----");
     }
     else {      // if root
         std::cout << "---";
     }
 
     // print value of the node
-    std::cout << node->data << std::endl;
+    std::cout << '[' << node->data << ", " << getHeight(node) << ", " << getBalance(node) << ']' << std::endl;
 
     // go to next level of the tree
-    print(prefix + "   ", node->right, true);
-    print(prefix + "   ", node->left, false);
+    print(prefix + "     ", node->right, true);
+    print(prefix + "     ", node->left, false);
 }
 
 template <typename T>
@@ -268,4 +268,38 @@ void BST<T>::deleteNodeWithTwoChildren(BTNode<T>* node) {
     }
 
     node->data = min_val;
+}
+
+template <typename T>
+int BST<T>::getHeight(const BTNode<T>* node) const {
+    if (!node) {
+        return 0;
+    }
+    int left_height = getHeight(node->left);
+    int right_height = getHeight(node->right);
+    
+    // compare which is bigger, return that value
+
+    return (left_height > right_height) ? left_height + 1 : right_height + 1;
+}
+
+template <typename T>
+int BST<T>::getBalance(const BTNode<T>* node) const {       // difference in height of left and right subtrees
+    if (!node) {
+        return 0;
+    }
+
+    return getHeight(node->left) - getHeight(node->right);      // will be negative if height is more on right, positive if more on left
+}
+
+
+template <typename T>
+void BST<T>::rotateRight(BTNode<T>* & node) {
+    if (!node || !node->left) {
+        return;
+    }
+    BTNode<T>* left_kid = node->left;       
+    node->left = left_kid->right;       // i dont get how this works in this tree because kid_left does not have a ->right, so is that not where 1 went?
+    left_kid->right = node;
+    node = left_kid;
 }

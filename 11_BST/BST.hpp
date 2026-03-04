@@ -32,6 +32,18 @@ public:
 
     // make deleteLeaf and deleteWithOneChild private
 
+    BTNode<T>* remove(const T& val, BTNode<T>* node);       // recursive removal
+    BTNode<T>* remove(const T& val, BTNode<T>* & node);     // - can pass pointer for node by reference (&), simplifies a lot but i'm not sure how yet
+    // LOOK AT SLIDES
+
+    // find height of binary tree - will use to balance and other things
+    int getHeight(const BTNode<T>* node) const;
+
+    // get the balance of the tree
+    int getBalance(const BTNode<T>* node) const;
+
+    void rotateRight(BTNode<T>* & node);
+
 private:
     void inorder(BTNode<T>* node) const;
     // helper function
