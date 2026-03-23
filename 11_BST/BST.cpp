@@ -299,7 +299,8 @@ void BST<T>::rotateRight(BTNode<T>* & node) {
         return;
     }
     BTNode<T>* left_kid = node->left;       
-    node->left = left_kid->right;       // i dont get how this works in this tree because kid_left does not have a ->right, so is that not where 1 went?
+    node->left = left_kid->right;       // i don't get how this works in this tree because kid_left does not have a ->right, so is that not where 1 went? memory leak?
     left_kid->right = node;
     node = left_kid;
 }
+
