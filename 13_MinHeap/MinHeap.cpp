@@ -2,6 +2,25 @@
 #include <iostream>
 
 template <typename T>
+void heapSort(std::vector<T>& v) {
+    MinHeap<T> heap(v);
+
+    for (int i = 0; i < v.size(); i++) {
+        v[i] = heap.deleteMin();
+    }
+}
+
+template <typename T>
+MinHeap<T>::MinHeap() {
+
+}
+
+template <typename T>
+MinHeap<T>::MinHeap(const std::vector<T>& v) : data(v) {
+    heapify();
+}
+
+template <typename T>
 void MinHeap<T>::insert(const T& val) {
     data.push_back(val);
     percolateUp();
@@ -60,7 +79,7 @@ T MinHeap<T>::deleteMin() {
         throw std::logic_error("deleteMin: empty heap");
     }
     T res = data[0];
-    data[0] = data[data.size() - 1];    // set the last element as the root
+    data[0] = data[data.size() - 1];    // set the last element as the root - keeps the tree complete by using the last one
     data.pop_back();    // remove the last element
 
     percolateDown();
@@ -69,8 +88,8 @@ T MinHeap<T>::deleteMin() {
 }
 
 template <typename T>
-void MinHeap<T>::percolateDown() {
-    int index = 0;
+void MinHeap<T>::percolateDown(int i) {
+    int index = i;
     int size = data.size();
 
     while (getLeftKidIndex(index) < size) {
@@ -90,3 +109,10 @@ void MinHeap<T>::percolateDown() {
     }
 }
 
+template <typename T>
+void MinHeap<T>::heapify() {
+    // start from bottom until no longer a leaf
+    for (int i = getLastWithKidsIndex(); i >= 0; i--) {
+        percolateDown(i);
+    }
+}
