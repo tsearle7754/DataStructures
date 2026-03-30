@@ -44,11 +44,14 @@ void Trie::print() const {
     print(root, word);  // need helper function
 }
 
+
 void Trie::print(const TrieNode* node, std::string& word) const {
     if (!node) return;  // base case
 
+    static int lineNumber = 1;
     if (node->end_of_word) {
-        std::cout << word << std::endl;
+        std::cout << lineNumber << ": " << word << std::endl;
+        lineNumber++;
     }
     // consider all children for all paths - check all children
     // if child exists, add character to the word - recursion
@@ -57,8 +60,13 @@ void Trie::print(const TrieNode* node, std::string& word) const {
         if (node->children[i]) {
             char c = 'a' + i;
             // add character to word
+            word.push_back(c);
             print(node->children[i], word);     // call recursively to print
             // remove character from word
+            word.pop_back();
         }
+    }
+    if (word.empty()) {
+        lineNumber = 1;
     }
 }
