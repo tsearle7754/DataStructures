@@ -41,9 +41,9 @@ void Graph<T>::insertEdge(const T& v1, const T& v2) {
 }
 
 template <typename T>
-void Graph<T>::print() const {
+void Graph<T>::print() const {              // make it look better TODO - done
     for (int i = 0; i < vertices.size(); i++) {
-        std::cout << "{ " << vertices[i] << ": ";
+        std::cout << "\n{ " << vertices[i] << ": ";
         for (int j = 0; j < edges[i].size(); j++) {
             std::cout << vertices[edges[i][j]] << " ";      // print the actual value
         }
