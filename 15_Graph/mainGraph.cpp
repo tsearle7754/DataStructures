@@ -2,18 +2,35 @@
 #include <string>
 
 int main(void) {
-    Graph<std::string> knowlegde;
+    Graph<std::string> knowledge;
 
-    knowlegde.insertVertex("AVL");
-    knowlegde.insertVertex("BST");
-    knowlegde.insertVertex("Trie");
-    knowlegde.insertVertex("Heap");
+    knowledge.insertVertex("A");
+    knowledge.insertVertex("B");
+    knowledge.insertVertex("C");
+    knowledge.insertVertex("D");
+    knowledge.insertVertex("E");
+    knowledge.insertVertex("F");
+    knowledge.insertVertex("G");
+    knowledge.insertVertex("H");
 
-    knowlegde.insertEdge("BST", "AVL");
-    knowlegde.insertEdge("BST", "Trie");
-    knowlegde.insertEdge("BST", "Heap");
+    knowledge.insertEdge("A", "B");
+    knowledge.insertEdge("A", "S");
+    knowledge.insertEdge("C", "S");
+    knowledge.insertEdge("G", "S");
+    knowledge.insertEdge("C", "F");
+    knowledge.insertEdge("C", "E");
+    knowledge.insertEdge("C", "D");
+    knowledge.insertEdge("E", "H");
+    knowledge.insertEdge("G", "H");
 
-    knowlegde.print();
+    knowledge.print();
+    knowledge.DFS();
+
+    knowledge.BFS();
+    knowledge.print();
+
+    std::cout << "A, F" << knowledge.shortestPath("A", "F") << std::endl;
+    std::cout << "A, D" << knowledge.shortestPath("A", "D");
 
     return 0;
 }
