@@ -29,8 +29,8 @@ int main(void) {
     knowledge.BFS();
     knowledge.print();
 
-    std::cout << "A, F" << knowledge.shortestPath("A", "F") << std::endl;
-    std::cout << "A, D" << knowledge.shortestPath("A", "D");
+    std::cout << "A, F" << knowledge.shortestPath("A", "F") << knowledge.isConnected() << std::endl;
+    std::cout << "A, D" << knowledge.shortestPath("A", "D") << knowledge.isConnected();
 
     return 0;
 }

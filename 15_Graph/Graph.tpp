@@ -77,7 +77,7 @@ template <typename T>
 void Graph<T>::BFS(int start) const {
     if (vertices.empty() || start < 0 || start >= vertices.size()) return;  // wrong starting number
 
-    std::vector<bool> discovered(vertices.size(), false);    // size, default
+    std::vector<int> discovered(vertices.size(), false);    // size, default
     std::queue<int> where_to_go;
 
     where_to_go.push(start);
@@ -140,4 +140,30 @@ int Graph<T>::shortestPath(const T& src, const T& dest) const {
         }
     }
     return -1;  // no path exists
+}
+
+template <typename T>
+bool Graph<T>::isConnected() const {
+    if (vertices.empty()) return true;
+
+    std::vector<bool> visited(vertices.size(), false);
+    std::queue<int> q;
+
+    q.push(0);
+    visited[0] = true;
+    int visited_count = 1;
+
+    while (!q.empty()) {
+        int current = q.front();
+        q.pop();    // don't reuse or revisit nodes
+
+        for (int neighbor : edges[current]) {
+            if (!visited[neighbor]) {
+                visited[neighbor] = true;
+                ++visited_count;
+                q.push(neighbor);
+            }
+        }
+    }
+    return visited_count == (int)vertices.size();
 }
