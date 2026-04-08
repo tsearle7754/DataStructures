@@ -99,7 +99,7 @@ void Graph<T>::BFS(int start) const {
 }
 
 template <typename T>
-int Graph<T>::shortestPath(const T& src, const T& dest) const {
+int Graph<T>::shortestPath(const T& src, const T& dest) const { // BFS
     // find indices
     int i_src = getVertexIndex(src);
     int i_dest = getVertexIndex(dest);

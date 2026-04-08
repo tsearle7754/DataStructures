@@ -1,8 +1,8 @@
-#include "Graph.hpp"
+#include "WeightedGraph.hpp"
 #include <string>
 
 int main(void) {
-    Graph<std::string> knowledge;
+    WeightedGraph<std::string> knowledge;
 
     knowledge.insertVertex("A");
     knowledge.insertVertex("B");
@@ -11,8 +11,11 @@ int main(void) {
     knowledge.insertVertex("E");
     knowledge.insertVertex("F");
     knowledge.insertVertex("G");
+    knowledge.insertVertex("S");
     knowledge.insertVertex("H");
 
+
+    // TODO
     knowledge.insertEdge("A", "B");
     knowledge.insertEdge("A", "S");
     knowledge.insertEdge("C", "S");
@@ -22,15 +25,16 @@ int main(void) {
     knowledge.insertEdge("C", "D");
     knowledge.insertEdge("E", "H");
     knowledge.insertEdge("G", "H");
+    knowledge.insertEdge("G", "F");
+    
 
     knowledge.print();
     knowledge.DFS();
 
     knowledge.BFS();
-    knowledge.print();
-
-    std::cout << "A, F" << knowledge.shortestPath("A", "F") << knowledge.isConnected() << std::endl;
-    std::cout << "A, D" << knowledge.shortestPath("A", "D") << knowledge.isConnected();
+    
+    std::cout << "\nA, F " << knowledge.shortestPath("A", "F") << std::endl;
+    std::cout << "A, D " << knowledge.shortestPath("A", "D") << std::endl;
 
     return 0;
 }
