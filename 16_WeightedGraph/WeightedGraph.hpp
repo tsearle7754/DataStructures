@@ -29,14 +29,16 @@ private:
 };
 
 // EDGE CLASS
-template <typename T>
 class Edge {
 public:
-    Edge(const Edge& edge, int weight);
+    int neighbor;
+    int weight;
 
-private:
-    Edge<T> neighbor;
+    Edge(int n, int w) : neighbor(n), weight(w) {}
 
+    bool operator<(const Edge& other) const {
+        return weight < other.weight;
+    }
 };
 
 #include "WeightedGraph.tpp"

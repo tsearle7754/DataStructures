@@ -141,6 +141,7 @@ int WeightedGraph<T>::shortestPath(const T& src, const T& dest) const {
     if (i_src == i_dest) {
         return 0;
     }
+
     // Create distances vector
     std::vector<int> distances(vertices.size(), INT_MAX); // distances from source to all other nodes
     distances[i_src] = 0;
@@ -152,13 +153,30 @@ int WeightedGraph<T>::shortestPath(const T& src, const T& dest) const {
 
     while (!heap.empty()) {
         // get the smallest edge from the heap
+        Edge current = heap.extractMin();
+        int i = current.neighbor;
+
+        if (visited[i]) continue;
+        visited[i] = true;
 
         // go through all unvisited neighbors of the smallest edge
+        for (const Edge& neighbor_edge : edges[i]) {
+            int v = neighbor_edge.neighbor;
+            int weight = neighbor_edge.weight;
 
-        // check the distance (if the distance is smaller, update the distance. if not, leave it)
+            if (!visited[i]) {
+                // check the distance (if the distance is smaller, update the distance. if not, leave it)
+                if (distances[i] != INT_MAX && distances[i] + weight < distances[v]) {
+                    distances[v] = distances[i] + weight;
 
-        // insert the edge into the heap
+                    // insert the edge into the heap
+                    heap.insert(Edge(v, distances[v]));
+                }
+            }
+        }
     }
 
-    return -1; // No path exists
+    return distances[i_dest] == INT_MAX ? -1 : distances[i_dest];
 }
+
+// Dijkstra's Algorithm - visited function

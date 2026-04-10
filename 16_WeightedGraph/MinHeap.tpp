@@ -100,3 +100,4 @@ template <typename T>
 bool MinHeap<T>::empty() const {
     return data.empty();
 }
+
