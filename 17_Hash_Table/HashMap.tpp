@@ -58,5 +58,31 @@ void HashMap<K, V>::print() const {
 
 template <typename K, typename V>
 int HashMap<K, V>::searchIndex(const K& key) const {
-    // if the next node is nullptr given hash, there is no such thing
+    // start searching from the hash of the key
+    int counter = 0;
+    int index = hash(key);
+
+    // loop until we find an empty slot (nullptr) which means key not found
+    // or we find the key itself
+    while (data[index] != nullptr) {
+        if (counter++ > data.size()) {  // gone through the whole thing - if we've looped all the way around, stop searching
+            return -1;
+        }
+
+        // if the current node is not deleted and key matches, return index
+        if (data[index]->key == key) {
+            return index;  // key found at this index
+        }
+
+        // otherwise, move to the next slot (linear probing)
+        index = (index + 1) % data.size();
+    }
+
+    // if we hit a nullptr, the key does not exist in the map
+    return -1;  // -1 indicates key not found
+}
+
+template <typename K, typename V>
+void HashMap<K, V>::remove(const K& key) {
+    
 }

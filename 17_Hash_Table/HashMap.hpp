@@ -9,12 +9,18 @@ class HashMap {
 public:
     HashMap(int size = 31);
     
+    // DO DECONSTRUCTOR
+    ~HashMap();
+    
     bool empty() const;
     bool full() const;
 
     void insert(const K& key, const V& value);
     void print() const;
-    const V& search(const K& key) const;
+    // TODO
+    const V& search(const K& key) const;    // if key doesn't exist, throw exception. if exists, return reference to value
+
+    void remove(const K& key);  // TODO
 
 private:
     std::vector<HashNode<K, V>*> data;
@@ -24,6 +30,7 @@ private:
 
     int hash(const K& key) const;
 
+    // TODO
     int searchIndex(const K& key) const;
 
 };
